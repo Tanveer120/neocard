@@ -1,18 +1,28 @@
 import express from "express";
-import { registerUser, loginUser, getMe, updateUser } from "../controllers/userController.js";
+import {initiateRegistration, completeRegistration, loginUser, getMe, updateUser, adminLogin } from "../controllers/userController.js";
 import auth from "../middleware/auth.js";
+import { requireAdmin } from "../middleware/requireAdmin.js";
 
-const router = express.Router();
+const userRouter = express.Router();
 
-router.post("/register", registerUser);
-router.post("/login", loginUser);
+// userRouter.post("/register", registerUser);
+userRouter.post("/register/initiate", initiateRegistration);
+userRouter.post("/register/complete", completeRegistration);
+userRouter.post("/login", loginUser);
 
 // Protected Route Example
-router.get("/profile", auth, (req, res) => {
+userRouter.get("/profile", auth, (req, res) => {
   res.json({ message: "Welcome to your profile!", userId: req.user.id });
 });
 
-router.get("/me", auth, getMe); // ✅ protected route
-router.put("/update", auth, updateUser); // ✅
+userRouter.get("/admin-only", auth, requireAdmin, (req, res) => {
+  res.send("Welcome Admin");
+});
 
-export default router;
+userRouter.get("/me", auth, getMe); // ✅ protected route
+userRouter.put("/update", auth, updateUser); // ✅
+
+
+userRouter.post("/admin", adminLogin);
+
+export default userRouter;
