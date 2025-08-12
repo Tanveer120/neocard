@@ -15,17 +15,17 @@ function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-pink-100">
+    <div className="min-h-screen bg-gray-50">
       <LoggedNav />
       <div className="flex">
         {/* Sidebar */}
-        <aside className="min-h-screen w-70 bg-white p-4 shadow-md">
-          <h2 className="text-lg font-semibold mb-4 text-pink-600">Dashboard Menu</h2>
-          <ul className="space-y-2">
+        <aside className="min-h-screen w-70 bg-white p-6 shadow-lg border-r border-gray-200">
+          <h2 className="text-xl font-bold mb-6 text-gray-800 border-b border-gray-200 pb-3">Dashboard Menu</h2>
+          <ul className="space-y-3">
             <li>
               <button
-                className={`w-full text-left px-4 py-2 rounded ${
-                  activeTab === "profile" ? "bg-pink-500 text-white" : "hover:bg-pink-100"
+                className={`w-full text-left px-4 py-3 rounded-lg transition-all duration-200 font-medium ${
+                  activeTab === "profile" ? "bg-blue-600 text-white shadow-md" : "text-gray-700 hover:bg-blue-50 hover:text-blue-600"
                 }`}
                 onClick={() => setActiveTab("profile")}
               >
@@ -37,7 +37,7 @@ function Dashboard() {
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 p-6">{renderContent()}</main>
+        <main className="flex-1 p-6 bg-gray-50">{renderContent()}</main>
       </div>
     </div>
   );

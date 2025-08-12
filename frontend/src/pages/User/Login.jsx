@@ -45,47 +45,60 @@ function Login() {
  
 
   return (
-    <div className="min-h-screen bg-pink-200 text-gray-800 flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 text-gray-800 flex flex-col">
       <Navbar />
 
       <div className="flex-1 flex items-center justify-center px-4">
-        <div className="bg-white shadow-md rounded-lg p-8 w-full max-w-md">
-          <h2 className="text-2xl font-bold text-pink-600 mb-4 text-center">
-            Login
-          </h2>
+        <div className="bg-white shadow-xl rounded-xl p-8 w-full max-w-md border border-gray-200">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">
+              Welcome Back
+            </h2>
+            <p className="text-gray-600">Sign in to your account</p>
+          </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <input
-              name="email"
-              type="email"
-              placeholder="Email"
-              onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded"
-              required
-            />
-            <input
-              name="password"
-              type="password"
-              placeholder="Password"
-              onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded"
-              required
-            />
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Email Address
+              </label>
+              <input
+                name="email"
+                type="email"
+                placeholder="Enter your email"
+                onChange={handleChange}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Password
+              </label>
+              <input
+                name="password"
+                type="password"
+                placeholder="Enter your password"
+                onChange={handleChange}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                required
+              />
+            </div>
             <button
               type="submit"
-              className="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 rounded"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl"
             >
-              Login
+              Sign In
             </button>
           </form>
 
-          <p className="mt-4 text-center text-sm text-gray-600">
+          <p className="mt-6 text-center text-sm text-gray-600">
             Don't have an account?{" "}
             <Link
               to="/register/initiate"
-              className="text-pink-600 hover:underline"
+              className="text-blue-600 hover:text-blue-700 font-medium"
             >
-              Register
+              Create account
             </Link>
           </p>
         </div>

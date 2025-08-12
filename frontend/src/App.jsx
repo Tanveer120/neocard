@@ -10,6 +10,7 @@ import Login from "./pages/User/Login";
 import LoggedHome from "./pages/User/LoggedHome";
 import Profile from "./pages/User/Profile";
 import ApplyDoctor from "./pages/User/DoctorApplication";
+import ApplyPharmacy from "./pages/User/PharmacyApplication";
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
           <Route path="/profile" element={token ? <Profile /> : <Home />} />
           <Route path="/profile1" element={token ? <Profile /> : <Home />} />
           <Route path="/apply-doctor" element={token ? <ApplyDoctor /> : <Home />} />
+          <Route path="/apply-pharmacy" element={token ? <ApplyPharmacy /> : <Home />} />
           {/* Add more protected routes here like /settings, etc. */}
         </Routes>
       </BrowserRouter>

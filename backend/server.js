@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import cors from "cors";
 import userRoutes from "./routes/userRoute.js";
 import doctorRoutes from "./routes/doctorRoute.js";
+import pharmacyRoutes from "./routes/pharmacyRoute.js";
+import pharmacyInventoryRoutes from "./routes/pharmacyInventoryRoute.js";
 
 dotenv.config();
 const app = express();
@@ -15,6 +17,8 @@ app.use(express.json());
 // Routes
 app.use("/api/users", userRoutes);
 app.use("/api/doctors", doctorRoutes);
+app.use("/api/pharmacy", pharmacyRoutes);
+app.use("/api/pharmacy-inventory", pharmacyInventoryRoutes);
 
 // DB Connection
 mongoose.connect(process.env.MONGO_URI, {})

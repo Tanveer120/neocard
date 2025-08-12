@@ -5,13 +5,15 @@ import SidebarLayout from "../../components/SidebarLayout";
 import { toast } from "react-toastify";
 import axios from "axios";
 
-function ApplyDoctor() {
+function ApplyPharmacy() {
   const { token } = useAuth();
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
-    degree: "",
-    specialization: "",
+    pharmacyName: "",
+    licenseNumber: "",
+    address: "",
+    phoneNumber: "",
     experience: "",
     documents: [],
   });
@@ -21,18 +23,18 @@ function ApplyDoctor() {
   const [statusChecked, setStatusChecked] = useState(false);
   const [applicationStatus, setApplicationStatus] = useState(null); // pending | approved | rejected | null
 
-  const cloudName = "dl9k1eipe"; // ✅ Your Cloudinary cloud name
-  const uploadPreset = "neoHealth"; // ✅ Your Cloudinary unsigned preset
+  const cloudName = "dl9k1eipe"; // Your Cloudinary cloud name
+  const uploadPreset = "neoHealth"; // Your Cloudinary unsigned preset
 
   // Check if user has already applied
   useEffect(() => {
     const checkApplicationStatus = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/doctors/check-status", {
+        const res = await axios.get("http://localhost:5000/api/pharmacy/check-status", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setApplicationStatus(res.data.status); // "pending", "approved", "rejected", or null
-        console.log("Application status:", res.data.status);
+        console.log("Pharmacy application status:", res.data.status);
       } catch (err) {
         console.error("Status check failed:", err);
       } finally {
@@ -83,7 +85,7 @@ function ApplyDoctor() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!form.degree || !form.specialization || !form.experience) {
+    if (!form.pharmacyName || !form.licenseNumber || !form.address || !form.phoneNumber || !form.experience) {
       toast.error("Please fill all required fields");
       return;
     }
@@ -95,17 +97,19 @@ function ApplyDoctor() {
 
     try {
       const payload = {
-        degree: form.degree,
-        specialization: form.specialization,
+        pharmacyName: form.pharmacyName,
+        licenseNumber: form.licenseNumber,
+        address: form.address,
+        phoneNumber: form.phoneNumber,
         experience: form.experience,
         documents: form.documents,
       };
 
-      await axios.post("http://localhost:5000/api/doctors/apply", payload, {
+      await axios.post("http://localhost:5000/api/pharmacy/apply", payload, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      toast.success("Application submitted!");
+      toast.success("Pharmacy application submitted!");
       navigate("/profile");
     } catch (err) {
       console.error("Application error:", err);
@@ -125,7 +129,7 @@ function ApplyDoctor() {
                 <div className="text-yellow-700 font-semibold text-xl mb-2">
                   ⏳ Application Under Review
                 </div>
-                <p className="text-yellow-600">Your doctor application is currently pending for review.</p>
+                <p className="text-yellow-600">Your pharmacy application is currently pending for review.</p>
               </div>
             )}
             {applicationStatus === "approved" && (
@@ -133,7 +137,7 @@ function ApplyDoctor() {
                 <div className="text-green-700 font-semibold text-xl mb-2">
                   ✅ Application Approved
                 </div>
-                <p className="text-green-600">Your doctor application has been approved!</p>
+                <p className="text-green-600">Your pharmacy application has been approved!</p>
               </div>
             )}
             {applicationStatus === "rejected" && (
@@ -141,29 +145,37 @@ function ApplyDoctor() {
                 <div className="text-red-700 font-semibold text-xl mb-2">
                   ❌ Application Rejected
                 </div>
-                <p className="text-red-600">Your doctor application was rejected. Please contact support for clarification.</p>
+                <p className="text-red-600">Your pharmacy application was rejected. Please contact support for clarification.</p>
               </div>
             )}
 
             {applicationStatus === "none" && (
               <>
                 <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
-                  Apply for Doctor Role
+                  Apply for Pharmacy Role
                 </h2>
                 <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <input
-                    name="degree"
-                    value={form.degree}
+                    name="pharmacyName"
+                    value={form.pharmacyName}
                     onChange={handleChange}
-                    placeholder="Medical Degree"
+                    placeholder="Pharmacy Name"
                     className="input"
                     required
                   />
                   <input
-                    name="specialization"
-                    value={form.specialization}
+                    name="licenseNumber"
+                    value={form.licenseNumber}
                     onChange={handleChange}
-                    placeholder="Specialization"
+                    placeholder="License Number"
+                    className="input"
+                    required
+                  />
+                  <input
+                    name="phoneNumber"
+                    value={form.phoneNumber}
+                    onChange={handleChange}
+                    placeholder="Phone Number"
                     className="input"
                     required
                   />
@@ -177,8 +189,18 @@ function ApplyDoctor() {
                     required
                   />
                   <div className="col-span-full">
+                    <input
+                      name="address"
+                      value={form.address}
+                      onChange={handleChange}
+                      placeholder="Pharmacy Address"
+                      className="input"
+                      required
+                    />
+                  </div>
+                  <div className="col-span-full">
                     <label className="block mb-1 text-gray-700 font-medium">
-                      Upload Documents (PDF or Images)
+                      Upload Documents (License, Registration, etc.)
                     </label>
                     <input
                       type="file"
@@ -224,4 +246,4 @@ function ApplyDoctor() {
   );
 }
 
-export default ApplyDoctor;
+export default ApplyPharmacy; 

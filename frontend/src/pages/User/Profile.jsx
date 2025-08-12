@@ -137,14 +137,17 @@ function Profile() {
     <div className="flex flex-col min-h-screen">
       <SidebarLayout>
         <div className="flex justify-center items-center w-full h-full p-4 overflow-y-auto">
-          <div className="w-full max-w-3xl bg-white shadow-md rounded-lg p-6">
-            <h2 className="text-2xl font-bold text-pink-600 mb-4 text-center">
-              Your Profile
-            </h2>
+          <div className="w-full max-w-4xl bg-white shadow-xl rounded-xl p-8 border border-gray-200">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">
+                Your Profile
+              </h2>
+              <p className="text-gray-600">Manage your personal and health information</p>
+            </div>
 
             <form
               onSubmit={handleSubmit}
-              className="grid grid-cols-1 md:grid-cols-2 gap-4"
+              className="grid grid-cols-1 md:grid-cols-2 gap-6"
             >
               <input name="firstName" value={form.firstName} onChange={handleChange} placeholder="First Name" className="input" />
               <input name="lastName" value={form.lastName} onChange={handleChange} placeholder="Last Name" className="input" />
@@ -206,7 +209,7 @@ function Profile() {
                 ))}
               </select>
 
-              <button type="submit" className="col-span-full bg-pink-500 text-white py-2 rounded hover:bg-pink-600 transition">
+              <button type="submit" className="col-span-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-xl">
                 Save Profile
               </button>
             </form>

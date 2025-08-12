@@ -59,23 +59,29 @@ function DocApplication() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 py-8 px-6">
-      <h1 className="text-3xl font-bold text-center text-pink-600 mb-8">
-        Admin – Pending Doctor Applications
-      </h1>
+    <div className="min-h-screen">
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          Doctor Applications
+        </h1>
+        <p className="text-gray-600">Review and manage pending doctor applications</p>
+      </div>
 
-      {applications.length === 0 ? (
-        <p className="text-center text-gray-600">No pending applications</p>
-      ) : (
-        <div className="grid gap-6 max-w-5xl mx-auto">
-          {applications.map((app) => (
-            <div
-              key={app._id}
-              className="bg-white p-6 rounded shadow border border-gray-200"
-            >
-              <h3 className="text-xl font-semibold text-pink-700 mb-2">
-                {app.userId?.firstName} {app.userId?.lastName}
-              </h3>
+              {applications.length === 0 ? (
+          <div className="text-center py-12">
+            <div className="text-gray-400 text-6xl mb-4">📋</div>
+            <p className="text-gray-600 text-lg">No pending applications</p>
+          </div>
+        ) : (
+          <div className="grid gap-6">
+            {applications.map((app) => (
+              <div
+                key={app._id}
+                className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow"
+              >
+                              <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                  {app.userId?.firstName} {app.userId?.lastName}
+                </h3>
               <p><strong>Email:</strong> {app.userId?.email}</p>
               <p><strong>Phone:</strong> {app.userId?.phoneNumber}</p>
               <p><strong>Degree:</strong> {app.degree}</p>
@@ -104,9 +110,9 @@ function DocApplication() {
             onClick={() => window.open(doc, "_blank")}
             className="w-full h-full flex items-center justify-center bg-gray-100 cursor-pointer hover:bg-gray-200"
           >
-            <span className="text-sm text-pink-600 font-medium text-center px-2">
-              View PDF {i + 1}
-            </span>
+                         <span className="text-sm text-blue-600 font-medium text-center px-2">
+               View PDF {i + 1}
+             </span>
           </div>
         ) : (
           <div className="w-full h-full flex items-center justify-center text-sm text-red-500">
@@ -124,13 +130,13 @@ function DocApplication() {
               <div className="mt-6 flex gap-4">
                 <button
                   onClick={() => updateStatus(app._id, "approved")}
-                  className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded"
+                  className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-medium transition-all duration-200 shadow-sm hover:shadow-md"
                 >
                   Approve
                 </button>
                 <button
                   onClick={() => updateStatus(app._id, "rejected")}
-                  className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
+                  className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-medium transition-all duration-200 shadow-sm hover:shadow-md"
                 >
                   Reject
                 </button>

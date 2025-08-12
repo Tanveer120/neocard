@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import Login from "./components/Login";
 import Dashboard from "./pages/Dashboard";
 import DocApplication from "./pages/DocApplication";
+import PharmacyApplication from "./pages/PharmacyApplication";
 
 
 import { ToastContainer } from "react-toastify";
@@ -29,10 +30,10 @@ const App = () => {
       ) : (
         <>
           <Navbar setToken={setToken} />
-          <hr className="border-gray-300" />
           <div className="flex w-full">
             <Sidebar />
-            <div className="w-[70%] mx-auto ml-[max(5vw,25px)] my-8 text-gray-600 text-base">
+            <div className="flex-1 p-8">
+              <div className="max-w-7xl mx-auto">
               <Routes>
                 
                 <Route
@@ -43,9 +44,14 @@ const App = () => {
                   path="/doctorApplication"
                   element={<DocApplication token={token} />}
                 />
+                <Route
+                  path="/pharmacyApplication"
+                  element={<PharmacyApplication token={token} />}
+                />
                 {/* <Route path="/chatUser" element={<AdminChat token={token} />} /> */}
                 
               </Routes>
+              </div>
             </div>
           </div>
         </>
