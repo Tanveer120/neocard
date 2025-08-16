@@ -20,9 +20,27 @@ const pharmacySchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
+    // Add inventory-related fields
+    inventory: [
+      {
+        productId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Product",
+          required: true,
+        },
+        quantity: {
+          type: Number,
+          required: true,
+          min: 0,
+        },
+        // Add more fields as needed
+      },
+    ],
   },
   { timestamps: true }
 );
 
 const Pharmacy = mongoose.model("Pharmacy", pharmacySchema);
-export default Pharmacy; 
+
+export { Pharmacy };
+export default Pharmacy;

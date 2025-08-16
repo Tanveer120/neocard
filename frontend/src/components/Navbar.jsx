@@ -1,7 +1,7 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-function Navbar() {
+const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [loggedIn, setLoggedIn] = useState(false);
@@ -19,44 +19,45 @@ function Navbar() {
   };
 
   return (
-    <nav className="bg-white shadow-lg border-b border-gray-200 px-6 py-4 flex justify-between items-center">
-      <Link to="/" className="text-2xl font-bold text-gray-900 hover:text-blue-600 transition-colors">
-        Neo Health Card
-      </Link>
-
-      {loggedIn ? (
-        <div className="space-x-4 flex items-center">
-          <Link
-            to="/profile"
-            className="px-4 py-2 text-blue-600 border border-blue-600 rounded-lg hover:bg-blue-50 transition-all duration-200 font-medium"
-          >
-            Profile
-          </Link>
-          <button
-            onClick={handleLogout}
-            className="px-4 py-2 border border-red-600 text-red-600 rounded-lg hover:bg-red-50 transition-all duration-200 font-medium"
-          >
-            Logout
-          </button>
-        </div>
-      ) : (
+    <nav className="bg-white shadow-md p-4">
+      <div className="container mx-auto flex justify-between items-center">
+        <h1 className="text-xl font-bold text-gray-900">NeoHealthCard</h1>
         <div className="space-x-4">
-          <Link
-            to="/login"
-            className="px-4 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition-all duration-200 font-medium"
-          >
-            Login
-          </Link>
-          <Link
-            to="/register/initiate"
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 font-medium shadow-sm hover:shadow-md"
-          >
-            Register
-          </Link>
+          {loggedIn ? (
+            <>
+              <Link
+                to="/profile"
+                className="text-gray-600 hover:text-gray-900"
+              >
+                Profile
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="text-red-600 hover:text-red-800"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/login"
+                className="text-gray-600 hover:text-gray-900"
+              >
+                Login
+              </Link>
+              <Link
+                to="/register/initiate"
+                className="bg-blue-600 text-white rounded-lg px-4 py-2 hover:bg-blue-700 transition-all duration-200 font-medium shadow-sm hover:shadow-md"
+              >
+                Register
+              </Link>
+            </>
+          )}
         </div>
-      )}
+      </div>
     </nav>
   );
-}
+};
 
 export default Navbar;

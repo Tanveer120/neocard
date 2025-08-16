@@ -1,26 +1,20 @@
 import express from "express";
 import auth from "../middleware/auth.js";
-import {
-  addInventoryItem,
-  getInventoryItems,
-  getInventoryItem,
-  updateInventoryItem,
-  adjustStock,
-  getLowStockAlerts,
-  getInventoryStats,
-} from "../controllers/pharmacyInventoryController.js";
+import { register, login } from "../controllers/pharmacyInventoryAuthController.js";
+import * as inventoryCtrl from "../controllers/pharmacyInventoryController.js";
 
 const router = express.Router();
 
-// Inventory management routes
-router.post("/add", auth, addInventoryItem);
-router.get("/items", auth, getInventoryItems);
-router.get("/item/:id", auth, getInventoryItem);
-router.put("/item/:id", auth, updateInventoryItem);
-router.post("/adjust-stock", auth, adjustStock);
+// Auth
+router.post("/auth/register", register);
+router.post("/auth/login", login);
 
-// Alerts and reports
-router.get("/low-stock-alerts", auth, getLowStockAlerts);
-router.get("/stats", auth, getInventoryStats);
+// Inventory (requires auth)
+router.post("/inventory", auth, inventoryCtrl.createItem);
+router.get("/inventory", auth, inventoryCtrl.listItems);
+router.get("/inventory/stats", auth, inventoryCtrl.inventoryStats);
+router.get("/inventory/low-stock", auth, inventoryCtrl.lowStockAlerts);
+router.put("/inventory/:id", auth, inventoryCtrl.updateItem);
+router.delete("/inventory/:id", auth, inventoryCtrl.deleteItem);
 
-export default router; 
+export default router;

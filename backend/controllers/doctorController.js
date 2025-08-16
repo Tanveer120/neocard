@@ -1,5 +1,6 @@
 import DoctorApplication from "../models/doctorApplication.js";
 
+
 export const applyDoctor = async (req, res) => {
   try {
     const { degree, specialization, experience, documents } = req.body;

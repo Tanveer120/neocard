@@ -256,4 +256,5 @@ pharmacyInventorySchema.pre('save', function(next) {
 
 const PharmacyInventory = mongoose.model("PharmacyInventory", pharmacyInventorySchema);
 
-export default PharmacyInventory; 
+export default PharmacyInventory;
+export { PharmacyInventory };

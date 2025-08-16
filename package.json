@@ -1,0 +1,19 @@
+{
+  "name": "neocard-monorepo",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Monorepo wrapper for NeoHealthCard services (backend, frontend, pharmacy, admin)",
+  "scripts": {
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:pharmacy": "cd pharmacy && npm run dev",
+    "dev:admin": "cd admin && npm run dev",
+    "dev": "npx concurrently \"npm:dev:backend\" \"npm:dev:frontend\" \"npm:dev:pharmacy\" \"npm:dev:admin\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  },
+  "engines": {
+    "node": ">=16"
+  }
+}

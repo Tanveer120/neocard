@@ -10,4 +10,4 @@ router.get("/check-status", auth, checkPharmacyStatus);
 router.get("/admin/pending-applications", getAllPendingPharmacyApplications);
 router.put("/admin/application/:id/status", updatePharmacyApplicationStatus);
 
-export default router; 
+export default router;

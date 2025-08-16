@@ -1,6 +1,6 @@
 import PharmacyApplication from "../models/pharmacyApplication.js";
 import User from "../models/userModel.js";
-import Pharmacy from "../models/pharmacyModel.js";
+import { Pharmacy } from "../models/pharmacyModel.js";
 
 // Get all pending pharmacy applications
 export const getAllPendingPharmacyApplications = async (req, res) => {
@@ -56,4 +56,4 @@ export const updatePharmacyApplicationStatus = async (req, res) => {
     console.error("Pharmacy approval error:", err);
     res.status(500).json({ message: "Server error during approval" });
   }
-}; 
+};

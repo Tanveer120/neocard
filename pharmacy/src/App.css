@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -39,4 +41,21 @@
 
 .read-the-docs {
   color: #888;
+}
+
+/* palette from main frontend */
+:root{
+  --brand: #2563eb; /* blue-600 */
+  --brand-600: #2563eb;
+  --muted: #6b7280;
+  --accent: #646cff;
+}
+
+.container{max-width:1280px;margin:0 auto;padding:1rem}
+
+.input{width:100%;padding:.75rem;border:1px solid #e5e7eb;border-radius:.375rem;outline:none;transition:border-color .15s}
+.input:focus{border-color:var(--brand-600);box-shadow:0 0 0 3px rgba(37,99,235,0.08)}
+
+@media (max-width: 768px){
+  #root{padding:1rem}
 }

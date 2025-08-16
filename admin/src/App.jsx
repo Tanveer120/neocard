@@ -6,7 +6,7 @@ import Login from "./components/Login";
 import Dashboard from "./pages/Dashboard";
 import DocApplication from "./pages/DocApplication";
 import PharmacyApplication from "./pages/PharmacyApplication";
-
+import UserList from "./pages/UserList";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -23,37 +23,31 @@ const App = () => {
   }, [token]);
 
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="min-h-screen bg-gray-100">
       <ToastContainer />
       {token === "" ? (
         <Login setToken={setToken} />
       ) : (
         <>
           <Navbar setToken={setToken} />
-          <div className="flex w-full">
-            <Sidebar />
-            <div className="flex-1 p-8">
-              <div className="max-w-7xl mx-auto">
+          <Sidebar />
+          <main className="p-6">
+            <div className="max-w-7xl mx-auto">
               <Routes>
-                
+                <Route path="/dashboard" element={<Dashboard token={token} />} />
                 <Route
-                  path="/dashboard"
-                  element={<Dashboard token={token} />}
-                />
-                <Route
-                  path="/doctorApplication"
+                  path="/applications"
                   element={<DocApplication token={token} />}
                 />
                 <Route
-                  path="/pharmacyApplication"
+                  path="/pharmacy"
                   element={<PharmacyApplication token={token} />}
                 />
+                <Route path="/users" element={<UserList token={token} />} />
                 {/* <Route path="/chatUser" element={<AdminChat token={token} />} /> */}
-                
               </Routes>
-              </div>
             </div>
-          </div>
+          </main>
         </>
       )}
     </div>

@@ -270,3 +270,38 @@ export const getInventoryStats = async (req, res) => {
     res.status(500).json({ message: "Failed to fetch inventory stats" });
   }
 }; 
+
+// Delete inventory item
+export const deleteItem = async (req, res) => {
+  try {
+    const pharmacyId = await getPharmacyId(req.user.id);
+    const item = await PharmacyInventory.findOneAndDelete({ _id: req.params.id, pharmacyId });
+    if (!item) return res.status(404).json({ message: "Inventory item not found" });
+    // Optionally log a transaction for deletion
+    await InventoryTransaction.create({
+      pharmacyId,
+      inventoryId: item._id,
+      transactionType: "delete",
+      quantity: 0,
+      unitPrice: item.costPrice,
+      totalAmount: 0,
+      stockBefore: item.currentStock,
+      stockAfter: 0,
+      createdBy: req.user.id,
+      notes: "Item deleted",
+    });
+
+    res.json({ message: "Inventory item deleted", item });
+  } catch (error) {
+    console.error("Delete inventory error:", error);
+    res.status(500).json({ message: "Failed to delete inventory item" });
+  }
+};
+
+// Backwards-compatible named exports used by the router
+export const createItem = addInventoryItem;
+export const listItems = getInventoryItems;
+export const getItem = getInventoryItem;
+export const updateItem = updateInventoryItem;
+export const inventoryStats = getInventoryStats;
+export const lowStockAlerts = getLowStockAlerts;
